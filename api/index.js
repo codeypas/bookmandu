@@ -17,6 +17,7 @@ mongoose
   })
 
 const app = express()
+const PORT = process.env.PORT || 3000;
 
 // Increase body parser limit for JSON payloads (especially for image Data URLs)
 app.use(express.json({ limit: "50mb" })) // Increased limit
