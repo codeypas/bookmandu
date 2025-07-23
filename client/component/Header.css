@@ -67,7 +67,7 @@
   background: #2563eb;
 }
 
-
+/* Burger Menu (Mobile) */
 .navbar-toggle {
   display: none;
   flex-direction: column;

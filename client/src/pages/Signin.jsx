@@ -1,41 +1,45 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import './Signin.css'; // Ensure this matches your component name
+"use client"
+
+import { useState } from "react"
+import { useNavigate, Link } from "react-router-dom"
+import "./Signin.css" 
 
 export default function SignIn() {
-  const [email, setEmail] = useState('');
-  const [password, setPasswinsoord] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate();
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const formData = { email, password };
+    const formData = { email, password }
 
     try {
-      const res = await fetch('/api/auth/signin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
-      });
+      })
 
-      // Check if the response status is not OK
       if (!res.ok) {
-        const errorData = await res.json(); // Get the error response
-        setErrorMessage(errorData.message || "Sign-in failed.");
-        return;
+        const errorData = await res.json()
+        setErrorMessage(errorData.message || "Sign-in failed.")
+        return
       }
 
-      const data = await res.json();
-      console.log('Signin successful:', data);
+      const data = await res.json()
+      console.log("Signin successful:", data)
 
-      navigate('/'); 
+      localStorage.setItem("user", JSON.stringify(data))
+      window.dispatchEvent(new Event("loginEvent")) 
+
+      navigate("/")
     } catch (error) {
-      console.error('Error during sign-in:', error);
-      setErrorMessage(error.message || "An unexpected error occurred.");
+      console.error("Error during sign-in:", error)
+      setErrorMessage(error.message || "An unexpected error occurred.")
     }
-  };
+  }
 
   return (
     <div className="signin-container">
@@ -43,7 +47,9 @@ export default function SignIn() {
         <h1 className="signin-title">Sign In</h1>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
-            <label htmlFor="email" className="input-label">Email</label>
+            <label htmlFor="email" className="input-label">
+              Email
+            </label>
             <input
               type="email"
               id="email"
@@ -55,13 +61,15 @@ export default function SignIn() {
           </div>
 
           <div className="input-group">
-            <label htmlFor="password" className="input-label">Password</label>
+            <label htmlFor="password" className="input-label">
+              Password
+            </label>
             <input
               type="password"
               id="password"
               className="input-field"
               value={password}
-              onChange={(e) => setPasswinsoord(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
@@ -73,15 +81,15 @@ export default function SignIn() {
           </div>
         </form>
 
-        {/* Show error message if present */}
         {errorMessage && <p className="error-message">{errorMessage}</p>}
 
         <p className="signup-prompt">
-          Don't have an account?{' '}
-          <Link to="/signup" className="signup-link">Sign Up</Link>
+          Don't have an account?{" "}
+          <Link to="/signup" className="signup-link">
+            Sign Up
+          </Link>
         </p>
       </div>
     </div>
-  );
+  )
 }
-
