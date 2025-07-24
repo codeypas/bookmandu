@@ -27,16 +27,17 @@ function verifyAdmin(req, res, next) {
   next()
 }
 
-// GET /books?genre=&author=&page=  => List with filter, rating, pagination
+// GET /books?title=&author=&page=  => List with filter, rating, pagination
+//for to filter by title and author
 router.get("/", async (req, res) => {
   try {
-    const { genre, author, page = 1 } = req.query
+    const { title, author, page = 1 } = req.query
     const limit = 5
     const skip = (page - 1) * limit
 
     const filter = {}
-    if (genre) filter.genre = { $regex: genre, $options: "i" } // Case-insensitive regex for genre
-    if (author) filter.author = { $regex: author, $options: "i" } // Case-insensitive regex for author
+    if (title) filter.title = { $regex: title, $options: "i" } // Case-insensitive regex for title and author
+    if (author) filter.author = { $regex: author, $options: "i" }
 
     const books = await Book.find(filter).skip(skip).limit(limit)
 

@@ -1,5 +1,3 @@
-"use client"
-
 import { useEffect, useState } from "react"
 import api from "../utils/api.js"
 import { Link } from "react-router-dom"

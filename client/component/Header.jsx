@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import "./Header.css"
@@ -40,7 +38,7 @@ export default function Header() {
   }
 
   return (
-    <header className="header">
+    <header className="header fixed top-0 left-0 w-full z-50">
       <nav className="navbar">
         <div className="navbar-brand">
           <Link to="/" className="navbar-logo">
@@ -49,20 +47,20 @@ export default function Header() {
         </div>
 
         <ul className={`navbar-links ${isMenuOpen ? "open" : ""}`}>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/services">Services</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li>
-          {/* Removed "Books" from here as per request */}
-        </ul>
+  <li>
+    <Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
+  </li>
+  <li>
+    <Link to="/about" onClick={() => setIsMenuOpen(false)}>About</Link>
+  </li>
+  <li>
+    <Link to="/services" onClick={() => setIsMenuOpen(false)}>Services</Link>
+  </li>
+  <li>
+    <Link to="/contact" onClick={() => setIsMenuOpen(false)}>Contact</Link>
+  </li>
+</ul>
+
 
         <div className="navbar-toggle" onClick={toggleMenu}>
           <span className="bar"></span>

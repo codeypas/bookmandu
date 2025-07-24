@@ -1,5 +1,3 @@
-"use client"
-
 import { useEffect, useState } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom" 
 import api from "../utils/api.js" // Import your custom axios instance

@@ -17,10 +17,10 @@ mongoose
   })
 
 const app = express()
+const PORT = process.env.PORT || 3000;
 
-// Increase body parser limit for JSON payloads (especially for image Data URLs)
-app.use(express.json({ limit: "50mb" })) // Increased limit
-app.use(express.urlencoded({ limit: "50mb", extended: true })) // Also increase for URL-encoded bodies if needed
+app.use(express.json({ limit: "50mb" }))
+app.use(express.urlencoded({ limit: "50mb", extended: true }))
 app.use(cookieParser()) // Use cookie-parser middleware
 
 // API routes
@@ -43,6 +43,6 @@ app.use((err, req, res, next) => {
   })
 })
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log("Server is running on port 3000....!")
 })

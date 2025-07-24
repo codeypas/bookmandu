@@ -1,4 +1,3 @@
-"use client"
 import { useEffect, useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 
@@ -15,13 +14,6 @@ export default function Home() {
     }
   }, [])
 
-  const handleLogout = () => {
-    localStorage.removeItem("user")
-    setCurrentUser(null)
-    window.dispatchEvent(new Event("logoutEvent"))
-    navigate("/signin")
-  }
-
   return (
     <div className="flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-6 flex-grow">
       <div className="bg-white p-10 rounded-xl shadow-2xl text-center max-w-2xl w-full">
@@ -34,12 +26,24 @@ export default function Home() {
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center gap-6 mb-10">
-          <Link
-            to="/booklist"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center justify-center"
-          >
-            Browse Books
-          </Link>
+          {currentUser ? (
+            // If user is logged in, show "Browse Books"
+            <Link
+              to="/booklist"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center justify-center"
+            >
+              Browse Books
+            </Link>
+          ) : (
+            // If user is not logged in, show "Sign Up or Login to see Book Review"
+            <Link
+              to="/signin"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center justify-center text-center"
+            >
+              Sign Up or Login to see Book Review
+            </Link>
+          )}
+
           {currentUser?.isAdmin && ( // Only show if admin
             <Link
               to="/addbook"
@@ -49,22 +53,6 @@ export default function Home() {
             </Link>
           )}
         </div>
-
-        {currentUser ? (
-          <button
-            onClick={handleLogout}
-            className="text-red-600 hover:text-red-800 font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out"
-          >
-            Logout
-          </button>
-        ) : (
-          <Link
-            to="/signin"
-            className="text-blue-600 hover:text-blue-800 font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out"
-          >
-            Sign In
-          </Link>
-        )}
       </div>
     </div>
   )
