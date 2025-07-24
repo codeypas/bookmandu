@@ -34,7 +34,7 @@ const sampleBooks = [
 
 const BookList = () => {
   const [books, setBooks] = useState([])
-  const [genre, setGenre] = useState("")
+  const [titleFilter, setTitleFilter] = useState("") // Changed from 'genre'
   const [author, setAuthor] = useState("")
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
@@ -50,7 +50,7 @@ const BookList = () => {
   const fetchBooks = async () => {
     try {
       const res = await api.get("/api/books", {
-        params: { genre, author, page },
+        params: { title: titleFilter, author, page }, // Changed 'genre' to 'title'
       })
       if (res.data?.books?.length > 0) {
         setBooks(res.data.books)
@@ -68,7 +68,7 @@ const BookList = () => {
 
   useEffect(() => {
     fetchBooks()
-  }, [genre, author, page])
+  }, [titleFilter, author, page]) // Changed 'genre' to 'titleFilter'
 
   const handleDeleteBook = async (bookId) => {
     if (!window.confirm("Are you sure you want to delete this book and all its reviews?")) {
@@ -89,16 +89,16 @@ const BookList = () => {
   }
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6 bg-gray-50 min-h-full">
       <h1 className="text-4xl font-extrabold text-gray-900 mb-8 text-center">Browse Books</h1>
 
       {/* Filters and Add Book Button */}
       <div className="flex flex-col sm:flex-row gap-4 mb-8 items-center justify-center sm:justify-between bg-white p-6 rounded-lg shadow-md">
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <input
-            placeholder="Filter by Genre"
-            value={genre}
-            onChange={(e) => setGenre(e.target.value)}
+            placeholder="Filter by Title" // Changed placeholder
+            value={titleFilter} // Changed value
+            onChange={(e) => setTitleFilter(e.target.value)} // Changed onChange
             className="border border-gray-300 px-4 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 w-full sm:w-auto"
           />
           <input
@@ -109,7 +109,7 @@ const BookList = () => {
           />
           <button
             onClick={() => {
-              setGenre("")
+              setTitleFilter("") // Changed clear
               setAuthor("")
               setPage(1)
             }}
@@ -132,7 +132,7 @@ const BookList = () => {
       {books.length === 0 ? (
         <p className="text-center text-gray-600 text-lg mt-10">No books found matching your criteria.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {books.map((book) => (
             <div
               key={book._id}

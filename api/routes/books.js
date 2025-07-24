@@ -28,15 +28,14 @@ function verifyAdmin(req, res, next) {
 }
 
 // GET /books?title=&author=&page=  => List with filter, rating, pagination
-//for to filter by title and author
 router.get("/", async (req, res) => {
   try {
-    const { title, author, page = 1 } = req.query
-    const limit = 5
+    const { title, author, page = 1 } = req.query 
+    const limit = 12 
     const skip = (page - 1) * limit
 
     const filter = {}
-    if (title) filter.title = { $regex: title, $options: "i" } // Case-insensitive regex for title and author
+    if (title) filter.title = { $regex: title, $options: "i" } // Case-insensitive regex for title
     if (author) filter.author = { $regex: author, $options: "i" }
 
     const books = await Book.find(filter).skip(skip).limit(limit)
@@ -119,7 +118,7 @@ router.get("/:id", async (req, res) => {
 router.post("/:id/reviews", verifyToken, async (req, res) => {
   const { review_text, rating } = req.body
   const bookId = req.params.id
-  const reviewerUsername = req.user.username // Get username from JWT payload
+  const reviewerUsername = req.user.username 
 
   if (!review_text || !rating) {
     return res.status(400).json({ message: "Review text and rating are required" })
