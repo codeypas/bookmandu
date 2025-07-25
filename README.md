@@ -48,33 +48,28 @@ client/
 │   └── Header.css
 ├── public/
 ├── src/
-│   ├── assets/
-│   ├── pages/
-│   │   ├── About.jsx
-│   │   ├── AddBook.jsx
-│   │   ├── BookDetail.jsx
-│   │   ├── BookList.jsx
-│   │   ├── Contact.jsx
-│   │   ├── Home.jsx
-│   │   ├── Services.jsx
-│   │   ├── Signin.jsx
-│   │   ├── Signup.jsx
-│   │   ├── index.css
-│   │   ├── main.jsx
-│   │   ├── Signin.css
-│   │   └── Signup.css
-│   ├── utils/
-│   │   └── api.js
-│   ├── App.jsx
-│   ├── App.css
-│   ├── main.jsx
-│   └── index.css
-├── .eslintrc.cjs
-├── .gitignore
-├── index.html
-├── package.json
-├── package-lock.json
-└── postcss.config.js
+    ├── assets/
+    ├── pages/
+    │   ├── About.jsx
+    │   ├── AddBook.jsx
+    │   ├── BookDetail.jsx
+    │   ├── BookList.jsx
+    │   ├── Contact.jsx
+    │   ├── Home.jsx
+    │   ├── Services.jsx
+    │   ├── Signin.jsx
+    │   ├── Signup.jsx
+    │   ├── index.css
+    │   ├── main.jsx
+    │   ├── Signin.css
+    │   └── Signup.css
+    ├── utils/
+    │   └── api.js
+    ├── App.jsx
+    ├── App.css
+    ├── main.jsx
+    └── index.css
+
 ```
 
 ---
@@ -114,7 +109,7 @@ npm install
 Create a `.env` file inside `/api`:
 
 ```
-MONGODB_URI=mongodb://localhost:27017/bookmandu
+MONGODB_URI=mongodb secret key
 JWT_SECRET=your_jwt_secret
 ```
 
@@ -131,13 +126,12 @@ cd client
 npm run dev
 ```
 
-Now visit: `http://localhost:3000` (frontend)  
-API runs at: `http://localhost:5000` (backend)
+Now visit: `http://localhost:5173/`
 
 ---
 
 ## ✍️ Author
 
 **Bijay Adhikari**  
-[Portfolio](https://github.com/codeypas) | [LinkedIn](https://linkedin.com/in/bijay-adhikari)
+[Portfolio](https://github.com/codeypas?tab=repositories) | [LinkedIn](https://www.linkedin.com/in/bijay-adhikari-656122327/)
 
